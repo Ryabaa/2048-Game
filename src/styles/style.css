@@ -268,8 +268,8 @@ body {
 .field__piece {
   background-color: #1f282e2f;
   border-radius: 10px;
-  width: 90px;
-  height: 90px;
+  width: 95px;
+  height: 95px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -280,6 +280,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   color: #ffffff;
-  font-size: 35px;
+  font-size: 32px;
+  font-weight: 600;
 }
 /*# sourceMappingURL=style.css.map */

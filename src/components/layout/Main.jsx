@@ -1,13 +1,14 @@
 import { IconContext } from "react-icons/lib";
 import { IoReload } from "react-icons/io5";
-import pieceColors from "../../utils/colors";
+
+import Piece from "./Piece.jsx";
 
 function Main() {
     const field = [
-        [0, 8, 0, 0],
-        [0, 2, 0, 8],
-        [0, 2, 2, 0],
-        [0, 0, 0, 0],
+        [32, 8, 4, 8192],
+        [64, 16384, 4096, 8],
+        [128, 2, 32768, 2048],
+        [256, 512, 1024, 16],
     ];
 
     return (
@@ -23,9 +24,7 @@ function Main() {
                     <p className="score__number">0</p>
                 </div>
             </div>
-            <div className="field">
-                {field.map((row, y) => row.map((piece, x) => <div className="field__piece">{piece == 0 ? "" : piece}</div>))}
-            </div>
+            <div className="field">{field.map((row, y) => row.map((number, x) => <Piece number={number} />))}</div>
             <div className="nav-container">
                 <button className="nav__res-btn">
                     <IconContext.Provider value={{ className: "nav__res-btn-icon" }}>
