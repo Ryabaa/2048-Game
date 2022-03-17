@@ -1,0 +1,205 @@
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
+
+@mixin slowTrans {
+    transition: all 0.4s ease;
+}
+
+html {
+    user-select: none;
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+* {
+    font-family: Comfortaa;
+    font-size: 12px;
+    margin: 0;
+    font-weight: normal;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background: none;
+    outline: none;
+}
+input {
+    border: 0;
+    outline: none;
+}
+
+body {
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%), no-repeat;
+}
+
+.header {
+    background-color: #1f282e;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    &__title {
+        color: #ffffff;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 25px;
+        letter-spacing: 1.5px;
+    }
+    &__icon {
+        color: #ffffff;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.main {
+    background-color: #1f282e7e;
+    border-radius: 20px;
+    padding: 60px 90px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 50px;
+    width: min-content;
+}
+
+.footer {
+    background-color: #1f282e;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    justify-content: space-between;
+    &-container {
+        display: flex;
+        column-gap: 5px;
+        align-items: center;
+    }
+    &__text {
+        font-family: "Times New Roman", Times, serif;
+        color: #ffffff;
+        font-size: 15px;
+    }
+    &__img {
+        height: 30px;
+    }
+    &__icon {
+        width: 30px;
+        height: 30px;
+        color: #d4223a;
+    }
+}
+
+.title {
+    font-size: 120px;
+    margin-right: 60px;
+    color: #a7c1f3;
+    line-height: 90px;
+}
+
+.info-container {
+    display: flex;
+    align-items: end;
+    column-gap: 10px;
+}
+
+.score {
+    &-container {
+        height: 80px;
+        width: 120px;
+        background-color: #1f282e2f;
+        border-bottom: #a7c1f3 2px solid;
+        padding: 3px 8px;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        row-gap: 10px;
+    }
+    &__text {
+        color: #a7c1f3;
+        font-size: 20px;
+    }
+    &__number {
+        color: #ffffff;
+        font-size: 30px;
+    }
+}
+
+.nav {
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &__res-btn {
+        border-radius: 10px;
+        padding: 5px 10px 2px;
+        background: #1f282e2f;
+        @include slowTrans();
+        &:hover {
+            background: #a7c2f386;
+            box-shadow: #a7c2f386 0px 1px 20px;
+            .nav__res-btn-icon {
+                color: #ffffff;
+            }
+        }
+        &-icon {
+            color: #a7c1f3;
+            width: 30px;
+            height: 30px;
+        }
+    }
+    &__menu-btn {
+        color: #a7c1f3;
+        background: #1f282e2f;
+        border-radius: 20px;
+        padding: 15px 20px;
+        font-size: 20px;
+        @include slowTrans();
+        &:hover {
+            color: #ffffff;
+            background: #a7c2f386;
+            box-shadow: #a7c2f386 0px 1px 20px;
+        }
+    }
+}
+
+.field {
+    border-radius: 20px;
+    width: 400px;
+    height: min-content;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 5px;
+    &__piece {
+        background-color: #1f282e2f;
+        border-radius: 10px;
+        width: 90px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-size: 35px;
+    }
+}
