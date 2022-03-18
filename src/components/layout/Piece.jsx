@@ -12,7 +12,7 @@ function Piece({ number }) {
     });
 
     return (
-        <div className="field__piece" style={{ background: colorState }}>
+        <div className="field__piece" style={{ background: colorState, boxShadow: `0px 1px 50px ${colorState + 50}` }}>
             {number == 0 ? "" : number}
         </div>
     );

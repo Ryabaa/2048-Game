@@ -1,15 +1,14 @@
+import React, { useContext } from "react";
+import { GameContext } from "../game/GameContext.jsx";
+
 import { IconContext } from "react-icons/lib";
 import { IoReload } from "react-icons/io5";
 
 import Piece from "./Piece.jsx";
 
 function Main() {
-    const field = [
-        [32, 8, 4, 8192],
-        [64, 16384, 4096, 8],
-        [128, 2, 32768, 2048],
-        [256, 512, 1024, 16],
-    ];
+    const { field, gameState } = useContext(GameContext);
+    console.log(field, gameState);
 
     return (
         <main className="main">

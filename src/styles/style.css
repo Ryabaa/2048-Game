@@ -48,6 +48,8 @@ body {
 
 .header {
   background-color: #1f282e;
+  -webkit-box-shadow: 0 2px 10px #1f282e;
+          box-shadow: 0 2px 10px #1f282e;
   height: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -102,6 +104,8 @@ body {
 }
 
 .footer {
+  -webkit-box-shadow: 0 -2px 10px #1f282e;
+          box-shadow: 0 -2px 10px #1f282e;
   background-color: #1f282e;
   height: 50px;
   display: -webkit-box;
@@ -282,5 +286,6 @@ body {
   color: #ffffff;
   font-size: 32px;
   font-weight: 600;
+  text-shadow: 0px 0.1px 10px #1f282e9c;
 }
 /*# sourceMappingURL=style.css.map */
