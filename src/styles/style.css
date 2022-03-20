@@ -101,6 +101,7 @@ body {
   width: -webkit-min-content;
   width: -moz-min-content;
   width: min-content;
+  height: 100%;
 }
 
 .footer {
