@@ -1,5 +1,7 @@
-import React, { useState, createContext, useReducer, useEffect } from "react";
-import createField from "../../utils/createField";
+import React, { useState, createContext, useCallback, useEffect } from "react";
+
+import createField from "./createField";
+import createPiece from "./createPiece";
 
 export const GameContext = createContext();
 
@@ -9,11 +11,17 @@ export const GameProvider = (props) => {
     const initialField = createField(fieldSize);
     const [field, setField] = useState(initialField);
 
+    const crtPiece = () => {
+        createPiece(field, setField);
+        console.log(field);
+    };
+
     return (
         <GameContext.Provider
             value={{
                 gameState: gameState,
                 field: field,
+                crtPiece: crtPiece,
             }}>
             {props.children}
         </GameContext.Provider>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import pieceColors from "../../utils/colors";
+import pieceColors from "../game/colors";
 
 function Piece({ number }) {
     const [colorState, setColorState] = useState("");

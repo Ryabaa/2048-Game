@@ -7,8 +7,7 @@ import { IoReload } from "react-icons/io5";
 import Piece from "./Piece.jsx";
 
 function Main() {
-    const { field, gameState } = useContext(GameContext);
-    console.log(field, gameState);
+    const { field, gameState, crtPiece } = useContext(GameContext);
 
     return (
         <main className="main">
@@ -25,7 +24,7 @@ function Main() {
             </div>
             <div className="field">{field.map((row, y) => row.map((number, x) => <Piece number={number} />))}</div>
             <div className="nav-container">
-                <button className="nav__res-btn">
+                <button onClick={crtPiece} className="nav__res-btn">
                     <IconContext.Provider value={{ className: "nav__res-btn-icon" }}>
                         <IoReload />
                     </IconContext.Provider>
