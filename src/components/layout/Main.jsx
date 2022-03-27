@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GameContext } from "../game/GameContext.jsx";
 
 import { IconContext } from "react-icons/lib";
@@ -7,7 +7,7 @@ import { IoReload } from "react-icons/io5";
 import Piece from "./Piece.jsx";
 
 function Main() {
-    const { field, gameState, crtPiece } = useContext(GameContext);
+    const { field, setField, gameState, crtPiece } = useContext(GameContext);
 
     return (
         <main className="main">
