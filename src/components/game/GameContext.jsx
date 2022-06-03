@@ -27,7 +27,7 @@ export const GameProvider = (props) => {
     };
 
     useEffect(() => {
-        movePiece(moveDirection, pieces, setPieces);
+        movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize);
         formView(fieldSize, setField, pieces);
     }, [moveDirection, pieces]);
 
