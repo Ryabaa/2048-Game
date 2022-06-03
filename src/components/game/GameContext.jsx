@@ -1,26 +1,46 @@
-import React, { useState, createContext, useCallback, useEffect } from "react";
+import React, { useState, createContext, useEffect } from "react";
 
-import createField from "./createField";
 import createPiece from "./createPiece";
 import formView from "./formView";
+import handleKeyPress from "./handleKeyPress";
+import movePiece from "./movePiece";
+
+import createField from "../../utils/createField";
 
 export const GameContext = createContext();
 
-export const GameProvider = (props) => {
-    const [gameState, setGameState] = useState("menu");
-    const [fieldSize, setFieldSize] = useState([4, 4]);
-    const initialField = createField(fieldSize);
-    const [field, setField] = useState(initialField);
-    const initialPieces = [];
-    const [pieces, setPieces] = useState(initialPieces);
+const initialGameState = "game";
+const initialFieldSize = 4;
+const initialPieces = [];
+const initialMoveDirection = "";
+const initialField = [];
 
-    const crtPiece = () => {
-        createPiece(field, setField, pieces, setPieces);
+export const GameProvider = (props) => {
+    const [gameState, setGameState] = useState(initialGameState);
+    const [fieldSize, setFieldSize] = useState(initialFieldSize);
+    const [pieces, setPieces] = useState(initialPieces);
+    const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
+    const [field, setField] = useState(initialField);
+
+    const handleCreatePiece = () => {
+        createPiece(fieldSize, pieces, setPieces);
     };
 
     useEffect(() => {
-        formView(fieldSize, setField, field, pieces);
-    }, [pieces]);
+        movePiece(moveDirection, pieces, setPieces);
+        formView(fieldSize, setField, pieces);
+    }, [moveDirection, pieces]);
+
+    useEffect(() => {
+        if (gameState === "game") {
+            createField(fieldSize);
+            createPiece(fieldSize, pieces, setPieces);
+            window.addEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+            return () => {
+                window.removeEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+            };
+        }
+    }, [gameState]);
 
     return (
         <GameContext.Provider
@@ -28,7 +48,7 @@ export const GameProvider = (props) => {
                 field: field,
                 setField: setField,
                 gameState: gameState,
-                crtPiece: crtPiece,
+                handleCreatePiece: handleCreatePiece,
             }}>
             {props.children}
         </GameContext.Provider>

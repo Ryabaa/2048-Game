@@ -1,6 +1,6 @@
-import createField from "./createField";
+import createField from "../../utils/createField";
 
-function formView(fieldSize, setField, field, pieces) {
+function formView(fieldSize, setField, pieces) {
     const newField = createField(fieldSize);
 
     newField.forEach((row, rowIndex) => {

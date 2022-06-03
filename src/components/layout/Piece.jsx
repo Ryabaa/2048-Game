@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import pieceColors from "../game/colors";
+import pieceColors from "../../utils/colors";
 
 function Piece({ number }) {
     const [colorState, setColorState] = useState("");
@@ -12,8 +12,8 @@ function Piece({ number }) {
     });
 
     return (
-        <div className="field__piece" style={{ background: colorState, boxShadow: `0px 1px 50px ${colorState + 50}` }}>
-            {number == 0 ? "" : number}
+        <div className="field__piece" style={number === 0 ? {} : { background: colorState, boxShadow: `0px 1px 50px ${colorState + 50}` }}>
+            {number === 0 ? "" : number}
         </div>
     );
 }
