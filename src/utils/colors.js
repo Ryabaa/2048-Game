@@ -1,7 +1,7 @@
 const pieceColors = [
     { number: 0, color: "#1f282e2f" },
-    { number: 2, color: "#d5d5db" },
-    { number: 4, color: "#7e7c8f" },
+    { number: 2, color: "#d5d5db2f" },
+    { number: 4, color: "#7e7c8f2f" },
     { number: 8, color: "#635da1" },
     { number: 16, color: "#8a34bf" },
     { number: 32, color: "#cb00eb" },

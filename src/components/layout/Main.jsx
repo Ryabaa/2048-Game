@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GameContext } from "../game/GameContext.jsx";
 
 import { IconContext } from "react-icons/lib";
@@ -22,7 +22,7 @@ function Main() {
                     <p className="score__number">0</p>
                 </div>
             </div>
-            <div className="field">{field.map((row, y) => row.map((number, x) => <Piece number={number} />))}</div>
+            <div className="field">{field.map((row, y) => row.map((number, x) => <Piece key={`${y}-${x}`} number={number} />))}</div>
             <div className="nav-container">
                 <button onClick={handleCreatePiece} className="nav__res-btn">
                     <IconContext.Provider value={{ className: "nav__res-btn-icon" }}>

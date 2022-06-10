@@ -3,9 +3,9 @@ import getRandom from "../../utils/getRandom";
 function createPiece(fieldSize, pieces, setPieces) {
     const getData = () => {
         const newPiece = {
-            y: getRandom(fieldSize),
-            x: getRandom(fieldSize),
-            number: getRandom(2) === 0 ? 2 : 4,
+            y: getRandom(fieldSize, null),
+            x: getRandom(fieldSize, null),
+            number: getRandom(null, [2, 4]),
         };
 
         //Проверку полон ли массив, потом вынести в фукнцию завершения игры
