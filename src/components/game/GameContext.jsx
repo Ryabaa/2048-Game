@@ -11,16 +11,16 @@ export const GameContext = createContext();
 
 const initialGameState = "game";
 const initialFieldSize = 4;
+const initialField = [];
 const initialPieces = [];
 const initialMoveDirection = "";
-const initialField = [];
 
 export const GameProvider = (props) => {
     const [gameState, setGameState] = useState(initialGameState);
     const [fieldSize, setFieldSize] = useState(initialFieldSize);
+    const [field, setField] = useState(initialField);
     const [pieces, setPieces] = useState(initialPieces);
     const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
-    const [field, setField] = useState(initialField);
 
     const handleCreatePiece = () => {
         createPiece(fieldSize, pieces, setPieces);
