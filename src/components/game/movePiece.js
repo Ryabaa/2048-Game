@@ -7,30 +7,13 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
 
         const moveFunction = (piece, count, nextPieceIndex, verticalDirection) => {
             const nextPiece = newPieces[nextPieceIndex];
-
             if (nextPieceIndex !== -1) {
-                if (nextPiece.number !== piece.number) return;
+                if (nextPiece.number !== piece.number) {
+                    return;
+                }
                 newPieces.splice(nextPieceIndex, 1);
                 piece.number *= 2;
             }
-
-            switch (moveDirection) {
-                case "up":
-                    if (piece.y === 0) return;
-                    break;
-                case "left":
-                    if (piece.x === 0) return;
-                    break;
-                case "down":
-                    if (piece.y === fieldSize) return;
-                    break;
-                case "right":
-                    if (piece.x === fieldSize) return;
-                    break;
-                default:
-                    break;
-            }
-
             verticalDirection ? (piece.y = count) : (piece.x = count);
             piecesMoved = true;
         };
@@ -40,6 +23,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.y; count >= 0; count--) {
                         const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y === element.y + 1);
+                        if (piece.y === 0) return;
                         moveFunction(piece, count, nextPieceIndex, true);
                     }
                 });
@@ -48,6 +32,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.x; count >= 0; count--) {
                         const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x + 1 && piece.y === element.y);
+                        if (piece.x === 0) return;
                         moveFunction(piece, count, nextPieceIndex, false);
                     }
                 });
@@ -56,6 +41,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.y; count < fieldSize; count++) {
                         const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y === element.y - 1);
+                        if (piece.y === fieldSize - 1) return;
                         moveFunction(piece, count, nextPieceIndex, true);
                     }
                 });
@@ -64,6 +50,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.x; count < fieldSize; count++) {
                         const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x - 1 && piece.y === element.y);
+                        if (piece.x === fieldSize - 1) return;
                         moveFunction(piece, count, nextPieceIndex, false);
                     }
                 });
@@ -74,7 +61,6 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
 
         setPieces(newPieces);
         setMoveDirection("");
-
         if (piecesMoved) createPiece(fieldSize, pieces, setPieces);
     }
     return;

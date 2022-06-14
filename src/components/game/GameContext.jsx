@@ -1,15 +1,14 @@
-import React, { useState, createContext, useEffect } from "react";
-
-import createPiece from "./createPiece";
-import formView from "./formView";
-import handleKeyPress from "./handleKeyPress";
-import movePiece from "./movePiece";
+import { useState, createContext, useEffect } from "react";
 
 import createField from "../../utils/createField";
+import createPiece from "./createPiece";
+import movePiece from "./movePiece";
+import handleKeyPress from "./handleKeyPress";
+import formView from "./formView";
 
 export const GameContext = createContext();
 
-const initialGameState = "game";
+const initialGameState = "start";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
@@ -21,10 +20,6 @@ export const GameProvider = (props) => {
     const [field, setField] = useState(initialField);
     const [pieces, setPieces] = useState(initialPieces);
     const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
-
-    const handleCreatePiece = () => {
-        createPiece(fieldSize, pieces, setPieces);
-    };
 
     useEffect(() => {
         movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize);
@@ -47,8 +42,10 @@ export const GameProvider = (props) => {
             value={{
                 field: field,
                 setField: setField,
+                fieldSize: fieldSize,
+                setFieldSize: setFieldSize,
                 gameState: gameState,
-                handleCreatePiece: handleCreatePiece,
+                setGameState: setGameState,
             }}>
             {props.children}
         </GameContext.Provider>

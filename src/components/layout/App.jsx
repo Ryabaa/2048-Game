@@ -1,17 +1,25 @@
+import { useContext } from "react";
+import { GameContext } from "../game/GameContext.jsx";
+
 import Header from "./Header.jsx";
-import Main from "./Main.jsx";
+import Start from "./Start.jsx";
+import Game from "./Game.jsx";
+import End from "./End.jsx";
 import Footer from "./Footer.jsx";
-import { GameProvider } from "../game/GameContext.jsx";
 
 function App() {
+    const { gameState } = useContext(GameContext);
+
     return (
-        <GameProvider>
-            <div className="App">
-                <Header />
-                <Main />
-                <Footer />
-            </div>
-        </GameProvider>
+        <div className="App">
+            <Header />
+
+            {gameState === "start" && <Start />}
+            {gameState === "game" && <Game />}
+            {gameState === "end" && <End />}
+
+            <Footer />
+        </div>
     );
 }
 
