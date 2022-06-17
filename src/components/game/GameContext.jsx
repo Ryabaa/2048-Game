@@ -5,10 +5,11 @@ import createPiece from "./createPiece";
 import movePiece from "./movePiece";
 import handleKeyPress from "./handleKeyPress";
 import formView from "./formView";
+import checkFieldFullness from "./checkFieldFullness";
 
 export const GameContext = createContext();
 
-const initialGameState = "start";
+const initialGameState = "game";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
@@ -24,6 +25,7 @@ export const GameProvider = (props) => {
     useEffect(() => {
         movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize);
         formView(fieldSize, setField, pieces);
+        checkFieldFullness(pieces, fieldSize, setGameState);
     }, [moveDirection, pieces]);
 
     useEffect(() => {

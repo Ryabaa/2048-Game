@@ -8,8 +8,7 @@ function createPiece(fieldSize, pieces, setPieces) {
             number: getRandom(null, [2, 4]),
         };
 
-        //Проверку полон ли массив, потом вынести в фукнцию завершения игры
-        if (pieces !== [] && pieces.length !== fieldSize * fieldSize) {
+        if (pieces !== []) {
             const pieceIndex = pieces.findIndex((piece) => piece.x === newPiece.x && piece.y === newPiece.y);
             if (pieceIndex !== -1) {
                 getData();
