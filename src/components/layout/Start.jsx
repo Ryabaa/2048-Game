@@ -35,7 +35,7 @@ function Start() {
     };
 
     return (
-        <div className="start">
+        <section className="start">
             <div className="start__play" onClick={handleStartGame}>
                 <p className="start__play-text">Play</p>
                 <IconContext.Provider value={{ className: "start__icon" }}>
@@ -58,7 +58,7 @@ function Start() {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
 
