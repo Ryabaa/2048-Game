@@ -9,11 +9,13 @@ import checkFieldFullness from "./checkFieldFullness";
 
 export const GameContext = createContext();
 
-const initialGameState = "game";
+const initialGameState = "start";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
 const initialMoveDirection = "";
+const initialScore = 0;
+const initialBestScore = 0;
 
 export const GameProvider = (props) => {
     const [gameState, setGameState] = useState(initialGameState);
@@ -21,9 +23,11 @@ export const GameProvider = (props) => {
     const [field, setField] = useState(initialField);
     const [pieces, setPieces] = useState(initialPieces);
     const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
+    const [score, setScore] = useState(initialScore);
+    const [bestScore, setBestScore] = useState(initialBestScore);
 
     useEffect(() => {
-        movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize);
+        movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
         formView(fieldSize, setField, pieces);
         checkFieldFullness(pieces, fieldSize, setGameState);
     }, [moveDirection, pieces]);
@@ -39,6 +43,20 @@ export const GameProvider = (props) => {
         }
     }, [gameState]);
 
+    useEffect(() => {
+        if (gameState === "end" && score > bestScore) {
+            localStorage.setItem("bestScore", score);
+        }
+    }, [gameState]);
+
+    useEffect(() => {
+        const getBestScore = localStorage.getItem("bestScore");
+
+        if (getBestScore) {
+            setBestScore(Number(getBestScore));
+        }
+    });
+
     return (
         <GameContext.Provider
             value={{
@@ -48,6 +66,8 @@ export const GameProvider = (props) => {
                 setFieldSize: setFieldSize,
                 gameState: gameState,
                 setGameState: setGameState,
+                score: score,
+                bestScore: bestScore,
             }}>
             {props.children}
         </GameContext.Provider>

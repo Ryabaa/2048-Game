@@ -174,23 +174,44 @@ body {
 .start__button {
   color: #fff;
   border-radius: 25px;
-  font-size: 18px;
   padding: 10px;
   font-weight: 700;
   background: #535c7565;
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 5px;
+  letter-spacing: 1px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
 
-.start__button:hover {
+.start__button-text {
+  font-size: 18px;
+}
+
+.start__button-score {
+  color: #e6e6e6;
+  font-size: 15px;
+}
+
+.start__button:hover, .start__button--active {
   background: #fff;
   color: #1f282e;
 }
 
-.start__button--active {
-  background: #fff;
-  color: #1f282e;
+.start__button:hover .start__button-score, .start__button--active .start__button-score {
+  color: #63717a;
 }
 
 .game {
@@ -313,16 +334,16 @@ body {
   font-size: 15px;
 }
 
-.score__line {
+.score__number {
+  color: #ffffff;
+  font-size: 23px;
+}
+
+.line {
   width: 20px;
   height: 2px;
   border-radius: 10px;
   background-color: #a7c1f3;
-}
-
-.score__number {
-  color: #ffffff;
-  font-size: 23px;
 }
 
 .nav-container {

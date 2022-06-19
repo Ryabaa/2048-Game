@@ -8,7 +8,9 @@ function FieldSizeButton({ button, buttonIndex, editButton, setFieldSize }) {
 
     return (
         <button className={active ? "start__button start__button--active" : "start__button"} onClick={handleChangeFieldSize}>
-            {name}
+            <p className="start__button-text">{name}</p>
+            <div className="line"></div>
+            <p className="start__button-score">Best: 228</p>
         </button>
     );
 }

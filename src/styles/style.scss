@@ -120,19 +120,30 @@ body {
     &__button {
         color: #fff;
         border-radius: 25px;
-        font-size: 18px;
         padding: 10px;
         font-weight: 700;
         background: #535c7565;
-        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 5px;
+        letter-spacing: 1px;
         @include slowTrans();
-        &:hover {
-            background: #fff;
-            color: #1f282e;
+        &-text {
+            font-size: 18px;
         }
+        &-score {
+            color: #e6e6e6;
+            font-size: 15px;
+        }
+        &:hover,
         &--active {
             background: #fff;
             color: #1f282e;
+            & .start__button-score {
+                color: #63717a;
+            }
         }
     }
 }
@@ -209,16 +220,17 @@ body {
         color: #a7c1f3;
         font-size: 15px;
     }
-    &__line {
-        width: 20px;
-        height: 2px;
-        border-radius: 10px;
-        background-color: #a7c1f3;
-    }
     &__number {
         color: #ffffff;
         font-size: 23px;
     }
+}
+
+.line {
+    width: 20px;
+    height: 2px;
+    border-radius: 10px;
+    background-color: #a7c1f3;
 }
 
 .nav {

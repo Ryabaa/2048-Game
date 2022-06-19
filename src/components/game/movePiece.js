@@ -1,6 +1,6 @@
 import createPiece from "./createPiece";
 
-function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize) {
+function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore) {
     if (moveDirection !== "") {
         let newPieces = pieces;
         let piecesMoved = false;
@@ -13,6 +13,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
                 }
                 newPieces.splice(nextPieceIndex, 1);
                 piece.number *= 2;
+                setScore((score += piece.number));
             }
             verticalDirection ? (piece.y = count) : (piece.x = count);
             piecesMoved = true;
