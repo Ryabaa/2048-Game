@@ -4,7 +4,6 @@ import { GameContext } from "../game/GameContext.jsx";
 import Header from "./Header.jsx";
 import Start from "./Start.jsx";
 import Game from "./Game.jsx";
-import End from "./End.jsx";
 import Footer from "./Footer.jsx";
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
 
             {gameState === "start" && <Start />}
             {gameState === "game" && <Game />}
-            {gameState === "end" && <End />}
+            {gameState === "end" && <Game />}
 
             <Footer />
         </div>

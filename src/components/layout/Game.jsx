@@ -7,9 +7,10 @@ import { CgMenu } from "react-icons/cg";
 import { VscDebugRestart } from "react-icons/vsc";
 
 import Piece from "./Piece.jsx";
+import End from "./End.jsx";
 
 function Game() {
-    const { field, fieldSize } = useContext(GameContext);
+    const { field, fieldSize, gameState } = useContext(GameContext);
 
     return (
         <main className="main">
@@ -27,6 +28,7 @@ function Game() {
                 </div>
             </div>
             <div style={{ "--field-size": fieldSize }} className="field">
+                {gameState === "end" && <End />}
                 {field.map((row, y) => row.map((number, x) => <Piece key={`${y}-${x}`} number={number} />))}
             </div>
             <div className="nav-container">
