@@ -3,37 +3,29 @@ function checkFieldFullness(pieces, fieldSize, setGameState) {
         let isFieldFull = true;
 
         pieces.forEach((piece) => {
-            if (piece.x !== 0 && piece.y !== 0 && piece.x !== fieldSize - 1 && piece.y !== fieldSize - 1) {
-                if (
-                    pieces.findIndex((element) => piece.x === element.x && piece.y === element.y + 1 && piece.number === element.number) !==
-                    -1
-                ) {
-                    isFieldFull = false;
-                }
-                if (
-                    pieces.findIndex((element) => piece.x === element.x && piece.y === element.y + 1 && piece.number === element.number) !==
-                    -1
-                ) {
-                    isFieldFull = false;
-                }
-                if (
-                    pieces.findIndex((element) => piece.x === element.x + 1 && piece.y === element.y && piece.number === element.number) !==
-                    -1
-                ) {
-                    isFieldFull = false;
-                }
-                if (
-                    pieces.findIndex((element) => piece.x === element.x && piece.y === element.y - 1 && piece.number === element.number) !==
-                    -1
-                ) {
-                    isFieldFull = false;
-                }
-                if (
-                    pieces.findIndex((element) => piece.x === element.x - 1 && piece.y === element.y && piece.number === element.number) !==
-                    -1
-                ) {
-                    isFieldFull = false;
-                }
+            if (
+                piece.y + 1 !== fieldSize &&
+                pieces.findIndex((element) => piece.x === element.x && piece.y + 1 === element.y && piece.number === element.number) !== -1
+            ) {
+                isFieldFull = false;
+            }
+            if (
+                piece.y - 1 !== -1 &&
+                pieces.findIndex((element) => piece.x === element.x && piece.y - 1 === element.y && piece.number === element.number) !== -1
+            ) {
+                isFieldFull = false;
+            }
+            if (
+                piece.x + 1 !== fieldSize &&
+                pieces.findIndex((element) => piece.x + 1 === element.x && piece.y === element.y && piece.number === element.number) !== -1
+            ) {
+                isFieldFull = false;
+            }
+            if (
+                piece.x - 1 !== -1 &&
+                pieces.findIndex((element) => piece.x - 1 === element.x && piece.y === element.y && piece.number === element.number) !== -1
+            ) {
+                isFieldFull = false;
             }
         });
 

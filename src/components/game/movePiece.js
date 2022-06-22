@@ -23,7 +23,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
             case "up":
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.y; count >= 0; count--) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y === element.y + 1);
+                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y - 1 === element.y);
                         if (piece.y === 0) return;
                         moveFunction(piece, count, nextPieceIndex, true);
                     }
@@ -32,7 +32,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
             case "left":
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.x; count >= 0; count--) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x + 1 && piece.y === element.y);
+                        const nextPieceIndex = newPieces.findIndex((element) => piece.x - 1 === element.x && piece.y === element.y);
                         if (piece.x === 0) return;
                         moveFunction(piece, count, nextPieceIndex, false);
                     }
@@ -41,7 +41,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
             case "down":
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.y; count < fieldSize; count++) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y === element.y - 1);
+                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y + 1 === element.y);
                         if (piece.y === fieldSize - 1) return;
                         moveFunction(piece, count, nextPieceIndex, true);
                     }
@@ -50,7 +50,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
             case "right":
                 newPieces.forEach((piece, pieceIndex) => {
                     for (let count = piece.x; count < fieldSize; count++) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x - 1 && piece.y === element.y);
+                        const nextPieceIndex = newPieces.findIndex((element) => piece.x + 1 === element.x && piece.y === element.y);
                         if (piece.x === fieldSize - 1) return;
                         moveFunction(piece, count, nextPieceIndex, false);
                     }
