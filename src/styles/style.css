@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
 html {
   -webkit-user-select: none;
@@ -70,6 +71,7 @@ body {
   color: #ffffff;
   font-size: 25px;
   letter-spacing: 1px;
+  font-family: "Josefin Sans";
 }
 
 .header__icon {
@@ -271,6 +273,7 @@ body {
 .footer__text {
   color: #ffffff;
   font-size: 14px;
+  font-family: "Josefin Sans";
 }
 
 .footer__img {
@@ -285,8 +288,9 @@ body {
 
 .title {
   font-size: 80px;
-  color: #a7c1f3;
+  font-weight: 600;
   line-height: 60px;
+  color: #a7c1f3;
 }
 
 .info {
@@ -331,17 +335,20 @@ body {
 
 .score__text {
   color: #a7c1f3;
-  font-size: 15px;
+  font-size: 17px;
+  line-height: 10px;
+  font-weight: 500;
 }
 
 .score__number {
   color: #ffffff;
   font-size: 23px;
+  font-family: "Josefin Sans";
 }
 
 .line {
   width: 20px;
-  height: 2px;
+  height: 3px;
   border-radius: 10px;
   background-color: #a7c1f3;
 }
@@ -371,12 +378,18 @@ body {
       -ms-flex-align: center;
           align-items: center;
   row-gap: 10px;
+  width: 50px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
 
 .nav__button:hover {
   color: #ffffff;
+}
+
+.nav__button-text {
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .nav__button-icon {
@@ -459,7 +472,8 @@ body {
 
 .end__text {
   color: #a7c1f3;
-  font-size: 40px;
+  font-size: 45px;
+  font-weight: 500;
   text-transform: uppercase;
 }
 

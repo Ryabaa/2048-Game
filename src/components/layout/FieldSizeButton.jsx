@@ -1,4 +1,4 @@
-function FieldSizeButton({ button, buttonIndex, editButton, setFieldSize }) {
+function FieldSizeButton({ button, buttonIndex, editButton, setFieldSize, bestScoresData }) {
     let { name, value, active } = button;
 
     const handleChangeFieldSize = () => {
@@ -10,7 +10,7 @@ function FieldSizeButton({ button, buttonIndex, editButton, setFieldSize }) {
         <button className={active ? "start__button start__button--active" : "start__button"} onClick={handleChangeFieldSize}>
             <p className="start__button-text">{name}</p>
             <div className="line"></div>
-            <p className="start__button-score">Best: 228</p>
+            <p className="start__button-score">Best: {bestScoresData[value]}</p>
         </button>
     );
 }

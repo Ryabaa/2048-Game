@@ -10,19 +10,19 @@ function Nav() {
                 <IconContext.Provider value={{ className: "nav__button-icon" }}>
                     <RiArrowGoBackLine />
                 </IconContext.Provider>
-                <p>Back</p>
+                <p className="nav__button-text">Back</p>
             </button>
             <button className="nav__button">
                 <IconContext.Provider value={{ className: "nav__button-icon" }}>
                     <CgMenu />
                 </IconContext.Provider>
-                <p>Menu</p>
+                <p className="nav__button-text">Menu</p>
             </button>
             <button className="nav__button">
                 <IconContext.Provider value={{ className: "nav__button-icon" }}>
                     <VscDebugRestart />
                 </IconContext.Provider>
-                <p>Restart</p>
+                <p className="nav__button-text">Restart</p>
             </button>
         </div>
     );

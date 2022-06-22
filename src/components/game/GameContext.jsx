@@ -15,7 +15,7 @@ const initialField = [];
 const initialPieces = [];
 const initialMoveDirection = "";
 const initialScore = 0;
-const initialBestScore = 0;
+const initialBestScoresData = { 3: 0, 4: 0, 5: 0 };
 
 export const GameProvider = (props) => {
     const [gameState, setGameState] = useState(initialGameState);
@@ -24,7 +24,7 @@ export const GameProvider = (props) => {
     const [pieces, setPieces] = useState(initialPieces);
     const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
     const [score, setScore] = useState(initialScore);
-    const [bestScore, setBestScore] = useState(initialBestScore);
+    const [bestScoresData, setBestScoresData] = useState(initialBestScoresData);
 
     useEffect(() => {
         movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
@@ -44,18 +44,19 @@ export const GameProvider = (props) => {
     }, [gameState]);
 
     useEffect(() => {
-        if (gameState === "end" && score > bestScore) {
-            localStorage.setItem("bestScore", score);
+        if (gameState === "end" && score > bestScoresData[fieldSize]) {
+            const newScoresData = { ...bestScoresData, [fieldSize]: score };
+            localStorage.setItem("bestScoresData", JSON.stringify(newScoresData));
         }
-    }, [gameState]);
+    }, [gameState, setBestScoresData]);
 
     useEffect(() => {
-        const getBestScore = localStorage.getItem("bestScore");
-
-        if (getBestScore) {
-            setBestScore(Number(getBestScore));
+        const localScoresData = JSON.parse(localStorage.getItem("bestScoresData"));
+        if (localScoresData) {
+            console.log(2);
+            setBestScoresData(localScoresData);
         }
-    });
+    }, [setBestScoresData]);
 
     return (
         <GameContext.Provider
@@ -67,7 +68,8 @@ export const GameProvider = (props) => {
                 gameState: gameState,
                 setGameState: setGameState,
                 score: score,
-                bestScore: bestScore,
+                bestScore: bestScoresData[fieldSize],
+                bestScoresData: bestScoresData,
             }}>
             {props.children}
         </GameContext.Provider>

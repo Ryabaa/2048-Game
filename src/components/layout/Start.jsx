@@ -18,7 +18,7 @@ const resetFieldSizeButtons = [
 ];
 
 function Start() {
-    const { setFieldSize, setGameState } = useContext(GameContext);
+    const { setFieldSize, setGameState, bestScoresData } = useContext(GameContext);
     const [fieldSizeButtons, setFieldSizeButtons] = useState(initialFieldSizeButtons);
 
     const editButton = useCallback(
@@ -54,6 +54,7 @@ function Start() {
                             buttonIndex={buttonIndex}
                             editButton={editButton}
                             setFieldSize={setFieldSize}
+                            bestScoresData={bestScoresData}
                         />
                     ))}
                 </div>
