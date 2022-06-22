@@ -27,10 +27,12 @@ export const GameProvider = (props) => {
     const [bestScoresData, setBestScoresData] = useState(initialBestScoresData);
 
     useEffect(() => {
-        movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
-        formView(fieldSize, setField, pieces);
-        checkFieldFullness(pieces, fieldSize, setGameState);
-    }, [moveDirection, pieces]);
+        if (gameState === "game") {
+            movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
+            formView(fieldSize, setField, pieces);
+            checkFieldFullness(pieces, fieldSize, setGameState);
+        }
+    }, [moveDirection, pieces, movePiece, formView, checkFieldFullness]);
 
     useEffect(() => {
         if (gameState === "game") {
@@ -41,20 +43,19 @@ export const GameProvider = (props) => {
                 window.removeEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
             };
         }
-    }, [gameState]);
+    }, [gameState, createField, createPiece, handleKeyPress]);
 
     useEffect(() => {
         if (gameState === "end" && score > bestScoresData[fieldSize]) {
             const newScoresData = { ...bestScoresData, [fieldSize]: score };
             localStorage.setItem("bestScoresData", JSON.stringify(newScoresData));
         }
-    }, [gameState, setBestScoresData]);
+    }, [gameState]);
 
     useEffect(() => {
-        const localScoresData = JSON.parse(localStorage.getItem("bestScoresData"));
-        if (localScoresData) {
-            console.log(2);
-            setBestScoresData(localScoresData);
+        const storageScoresData = JSON.parse(localStorage.getItem("bestScoresData"));
+        if (storageScoresData) {
+            setBestScoresData(storageScoresData);
         }
     }, [setBestScoresData]);
 
