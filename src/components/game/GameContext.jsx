@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 
-import createField from "../../utils/createField";
+import createField from "./createField";
 import createPiece from "./createPiece";
 import movePiece from "./movePiece";
 import handleKeyPress from "./handleKeyPress";
@@ -26,6 +26,25 @@ export const GameProvider = (props) => {
     const [score, setScore] = useState(initialScore);
     const [bestScoresData, setBestScoresData] = useState(initialBestScoresData);
 
+    // Create game field and first piece
+    useEffect(() => {
+        if (gameState === "game") {
+            createField(fieldSize);
+            createPiece(fieldSize, pieces, setPieces);
+        }
+    }, [gameState, createField, createPiece]);
+
+    // Key press listener
+    useEffect(() => {
+        if (gameState === "game") {
+            window.addEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+            return () => {
+                window.removeEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+            };
+        }
+    }, [gameState, handleKeyPress]);
+
+    // Pieces movement and rendering
     useEffect(() => {
         if (gameState === "game") {
             movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
@@ -34,17 +53,7 @@ export const GameProvider = (props) => {
         }
     }, [moveDirection, pieces, movePiece, formView, checkFieldFullness]);
 
-    useEffect(() => {
-        if (gameState === "game") {
-            createField(fieldSize);
-            createPiece(fieldSize, pieces, setPieces);
-            window.addEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
-            return () => {
-                window.removeEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
-            };
-        }
-    }, [gameState, createField, createPiece, handleKeyPress]);
-
+    // Save best score to local storage
     useEffect(() => {
         if (gameState === "end" && score > bestScoresData[fieldSize]) {
             const newScoresData = { ...bestScoresData, [fieldSize]: score };
@@ -52,12 +61,19 @@ export const GameProvider = (props) => {
         }
     }, [gameState]);
 
+    // Get best score from local storage
     useEffect(() => {
         const storageScoresData = JSON.parse(localStorage.getItem("bestScoresData"));
         if (storageScoresData) {
             setBestScoresData(storageScoresData);
         }
     }, [setBestScoresData]);
+
+    const resetGame = () => {
+        setField(initialField);
+        setPieces(initialPieces);
+        setScore(initialScore);
+    };
 
     return (
         <GameContext.Provider
@@ -71,6 +87,7 @@ export const GameProvider = (props) => {
                 score: score,
                 bestScore: bestScoresData[fieldSize],
                 bestScoresData: bestScoresData,
+                resetGame: resetGame,
             }}>
             {props.children}
         </GameContext.Provider>
