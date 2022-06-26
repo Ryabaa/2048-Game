@@ -46,12 +46,19 @@ export const GameProvider = (props) => {
 
     // Pieces movement and rendering
     useEffect(() => {
-        if (gameState === "game") {
+        if (gameState === "game" && moveDirection !== "") {
+            pieces.forEach((i) => console.log(i));
             movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
+        }
+    }, [moveDirection, movePiece, pieces]);
+
+    // Pieces movement and rendering
+    useEffect(() => {
+        if (gameState === "game") {
             formView(fieldSize, setField, pieces);
             checkFieldFullness(pieces, fieldSize, setGameState);
         }
-    }, [moveDirection, pieces, movePiece, formView, checkFieldFullness]);
+    }, [pieces, formView, checkFieldFullness]);
 
     // Save best score to local storage
     useEffect(() => {
@@ -70,8 +77,8 @@ export const GameProvider = (props) => {
     }, [setBestScoresData]);
 
     const resetGame = () => {
-        setField(initialField);
         setPieces(initialPieces);
+        setField(initialField);
         setScore(initialScore);
     };
 

@@ -1,69 +1,70 @@
 import createPiece from "./createPiece";
 
 function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore) {
-    if (moveDirection !== "") {
-        let newPieces = pieces;
-        let piecesMoved = false;
+    let piecesMoved = false;
 
-        const moveFunction = (piece, count, nextPieceIndex, verticalDirection) => {
-            const nextPiece = newPieces[nextPieceIndex];
-            if (nextPieceIndex !== -1) {
-                if (nextPiece.number !== piece.number) {
-                    return;
-                }
-                newPieces.splice(nextPieceIndex, 1);
-                piece.number *= 2;
-                setScore((score += piece.number));
+    const moveFunction = (piece, count, nextPieceIndex, verticalDirection) => {
+        const nextPiece = pieces[nextPieceIndex];
+        if (nextPieceIndex !== -1) {
+            if (nextPiece.number !== piece.number) {
+                return;
             }
-            verticalDirection ? (piece.y = count) : (piece.x = count);
-            piecesMoved = true;
-        };
-
-        switch (moveDirection) {
-            case "up":
-                newPieces.forEach((piece, pieceIndex) => {
-                    for (let count = piece.y; count >= 0; count--) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y - 1 === element.y);
-                        if (piece.y === 0) return;
-                        moveFunction(piece, count, nextPieceIndex, true);
-                    }
-                });
-                break;
-            case "left":
-                newPieces.forEach((piece, pieceIndex) => {
-                    for (let count = piece.x; count >= 0; count--) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x - 1 === element.x && piece.y === element.y);
-                        if (piece.x === 0) return;
-                        moveFunction(piece, count, nextPieceIndex, false);
-                    }
-                });
-                break;
-            case "down":
-                newPieces.forEach((piece, pieceIndex) => {
-                    for (let count = piece.y; count < fieldSize; count++) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x === element.x && piece.y + 1 === element.y);
-                        if (piece.y === fieldSize - 1) return;
-                        moveFunction(piece, count, nextPieceIndex, true);
-                    }
-                });
-                break;
-            case "right":
-                newPieces.forEach((piece, pieceIndex) => {
-                    for (let count = piece.x; count < fieldSize; count++) {
-                        const nextPieceIndex = newPieces.findIndex((element) => piece.x + 1 === element.x && piece.y === element.y);
-                        if (piece.x === fieldSize - 1) return;
-                        moveFunction(piece, count, nextPieceIndex, false);
-                    }
-                });
-                break;
-            default:
-                break;
+            pieces.splice(nextPieceIndex, 1);
+            piece.number *= 2;
+            setScore((score += piece.number));
         }
+        verticalDirection ? (piece.y = count) : (piece.x = count);
+        piecesMoved = true;
+    };
 
-        setPieces(newPieces);
-        setMoveDirection("");
-        if (piecesMoved) createPiece(fieldSize, pieces, setPieces);
+    switch (moveDirection) {
+        case "up":
+            pieces.forEach((piece, pieceIndex) => {
+                for (let count = piece.y; count >= 0; count--) {
+                    const nextPieceIndex = pieces.findIndex((element) => piece.x === element.x && piece.y - 1 === element.y);
+                    if (piece.y === 0) return;
+                    moveFunction(piece, count, nextPieceIndex, true);
+                }
+            });
+            break;
+        case "left":
+            pieces.forEach((piece, pieceIndex) => {
+                for (let count = piece.x; count >= 0; count--) {
+                    const nextPieceIndex = pieces.findIndex((element) => piece.x - 1 === element.x && piece.y === element.y);
+                    if (piece.x === 0) return;
+                    moveFunction(piece, count, nextPieceIndex, false);
+                }
+            });
+            break;
+        case "down":
+            pieces.forEach((piece, pieceIndex) => {
+                for (let count = piece.y; count < fieldSize; count++) {
+                    const nextPieceIndex = pieces.findIndex((element) => piece.x === element.x && piece.y + 1 === element.y);
+                    if (piece.y === fieldSize - 1) return;
+                    moveFunction(piece, count, nextPieceIndex, true);
+                }
+            });
+            break;
+        case "right":
+            pieces.forEach((piece, pieceIndex) => {
+                for (let count = piece.x; count < fieldSize; count++) {
+                    const nextPieceIndex = pieces.findIndex((element) => piece.x + 1 === element.x && piece.y === element.y);
+                    if (piece.x === fieldSize - 1) return;
+                    moveFunction(piece, count, nextPieceIndex, false);
+                }
+            });
+            break;
+        default:
+            break;
     }
+
+    if (piecesMoved) {
+        setPieces(pieces);
+        createPiece(fieldSize, pieces, setPieces);
+    }
+
+    setMoveDirection("");
+
     return;
 }
 
