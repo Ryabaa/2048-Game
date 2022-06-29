@@ -92,6 +92,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  text-align: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -104,7 +105,7 @@ body {
 .start__play {
   cursor: pointer;
   border-radius: 15px 15px 0 0;
-  border-bottom: #535c7565 7px solid;
+  border-bottom: #535c7565 5px solid;
   padding: 20px 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,8 +144,8 @@ body {
   height: 60px;
   color: #fff;
   border-radius: 50%;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .start__fieldsize {
@@ -160,7 +161,7 @@ body {
 
 .start__fieldsize-text {
   color: #fff;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 .start__buttons-container {
@@ -175,41 +176,65 @@ body {
 }
 
 .start__button {
-  color: #fff;
-  border-radius: 25px;
-  padding: 10px;
+  border-radius: 5px 20px 5px 20px;
+  background-color: #535c753b;
+  padding-left: 15px;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
   font-weight: 700;
-  background: #535c7565;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  color: #fff;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-grid-columns: (auto)[2];
+      grid-template-columns: repeat(2, auto);
+  border-left: 5px solid #ffffff00;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.start__button-text {
+  letter-spacing: 2px;
+  font-size: 21px;
+}
+
+.start__button-info {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  background: #535c7586;
+  padding: 10px 15px;
+  border-radius: 5px 20px 5px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   row-gap: 5px;
-  letter-spacing: 1px;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
 }
 
-.start__button-text {
+.start__button-info-text {
   font-size: 18px;
+  font-weight: 600;
 }
 
 .start__button-score {
   color: #e6e6e6;
   font-family: Josefin Sans;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .start__button:hover, .start__button--active {
+  border-left: 5px solid #535c7586;
+}
+
+.start__button:hover .start__button-info, .start__button--active .start__button-info {
   background: #fff;
   color: #1f282e;
 }
@@ -381,8 +406,8 @@ body {
           align-items: center;
   row-gap: 10px;
   width: 50px;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .nav__button:hover {

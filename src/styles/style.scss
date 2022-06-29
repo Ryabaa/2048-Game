@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Comfortaa:300,regular,500,600,700);
 
 @mixin slowTrans {
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
 }
 
 html {
@@ -73,13 +73,14 @@ body {
     padding: 40px 80px;
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     justify-content: space-between;
     row-gap: 50px;
     &__play {
         cursor: pointer;
         border-radius: 15px 15px 0 0;
-        border-bottom: #535c7565 7px solid;
+        border-bottom: #535c7565 5px solid;
         padding: 20px 40px;
         display: flex;
         justify-content: center;
@@ -112,7 +113,7 @@ body {
         row-gap: 20px;
         &-text {
             color: #fff;
-            font-size: 25px;
+            font-size: 30px;
         }
     }
     &__buttons-container {
@@ -121,30 +122,47 @@ body {
         row-gap: 20px;
     }
     &__button {
-        color: #fff;
-        border-radius: 25px;
-        padding: 10px;
+        border-radius: 5px 20px 5px 20px;
+        background-color: #535c753b;
+        padding-left: 15px;
+        column-gap: 10px;
         font-weight: 700;
-        background: #535c7565;
-        display: flex;
-        justify-content: center;
+        color: #fff;
+        display: grid;
+        justify-content: space-between;
         align-items: center;
-        flex-direction: column;
-        row-gap: 5px;
-        letter-spacing: 1px;
+        grid-template-columns: repeat(2, auto);
+        border-left: 5px solid #ffffff00;
         @include slowTrans();
         &-text {
-            font-size: 18px;
+            letter-spacing: 2px;
+            font-size: 21px;
+        }
+        &-info {
+            @include slowTrans();
+            background: #535c7586;
+            padding: 10px 15px;
+            border-radius: 5px 20px 5px 20px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+            &-text {
+                font-size: 18px;
+                font-weight: 600;
+            }
         }
         &-score {
             color: #e6e6e6;
             font-family: Josefin Sans;
-            font-size: 15px;
+            font-size: 17px;
         }
         &:hover,
         &--active {
-            background: #fff;
-            color: #1f282e;
+            border-left: 5px solid #535c7586;
+            & .start__button-info {
+                background: #fff;
+                color: #1f282e;
+            }
             & .start__button-score {
                 color: #63717a;
             }

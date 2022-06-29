@@ -6,7 +6,10 @@ import movePiece from "./movePiece";
 import changeMoveDirection from "./changeMoveDirection";
 import formView from "./formView";
 import checkFieldFullness from "./checkFieldFullness";
+
 import deepCopy from "../../utils/deepCopy";
+import getLocalStorage from "../../utils/getLocalStorage";
+import setLocalStorage from "../../utils/setLocalStorage";
 
 export const GameContext = createContext();
 
@@ -73,19 +76,21 @@ export const GameProvider = (props) => {
 
     // Save best score to local storage
     useEffect(() => {
-        if (gameState === "end" && score > bestScoresData[fieldSize]) {
+        if (score > bestScoresData[fieldSize]) {
             const newScoresData = { ...bestScoresData, [fieldSize]: score };
-            localStorage.setItem("bestScoresData", JSON.stringify(newScoresData));
+            setLocalStorage("bestScoresData", JSON.stringify(newScoresData));
         }
-    }, [gameState]);
+    }, [score, setLocalStorage]);
 
     // Get best score from local storage
     useEffect(() => {
-        const storageScoresData = JSON.parse(localStorage.getItem("bestScoresData"));
-        if (storageScoresData) {
-            setBestScoresData(storageScoresData);
+        if (gameState !== "end") {
+            const storageScoresData = JSON.parse(getLocalStorage("bestScoresData"));
+            if (storageScoresData) {
+                setBestScoresData(storageScoresData);
+            }
         }
-    }, [setBestScoresData]);
+    }, [gameState, score, setBestScoresData, getLocalStorage]);
 
     return (
         <GameContext.Provider
