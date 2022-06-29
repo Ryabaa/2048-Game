@@ -3,9 +3,10 @@ import { useState, createContext, useEffect } from "react";
 import createField from "./createField";
 import createPiece from "./createPiece";
 import movePiece from "./movePiece";
-import handleKeyPress from "./handleKeyPress";
+import changeMoveDirection from "./changeMoveDirection";
 import formView from "./formView";
 import checkFieldFullness from "./checkFieldFullness";
+import deepCopy from "../../utils/deepCopy";
 
 export const GameContext = createContext();
 
@@ -13,6 +14,7 @@ const initialGameState = "start";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
+const initialPrevPieces = [];
 const initialMoveDirection = "";
 const initialScore = 0;
 const initialBestScoresData = { 3: 0, 4: 0, 5: 0 };
@@ -22,42 +24,51 @@ export const GameProvider = (props) => {
     const [fieldSize, setFieldSize] = useState(initialFieldSize);
     const [field, setField] = useState(initialField);
     const [pieces, setPieces] = useState(initialPieces);
+    const [prevPieces, setPrevPieces] = useState(initialPrevPieces);
     const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
     const [score, setScore] = useState(initialScore);
     const [bestScoresData, setBestScoresData] = useState(initialBestScoresData);
 
+    const resetGame = () => {
+        setPieces(initialPieces);
+        setPrevPieces(initialPrevPieces);
+        setScore(initialScore);
+    };
+
+    const handleKeyPress = (event) => {
+        changeMoveDirection(event, setMoveDirection);
+    };
+
     // Create game field and first piece
     useEffect(() => {
-        if (gameState === "game") {
+        if (gameState === "game" && pieces.length === 0) {
             createField(fieldSize);
             createPiece(fieldSize, pieces, setPieces);
         }
-    }, [gameState, createField, createPiece]);
+    }, [gameState, pieces, createField, createPiece]);
 
     // Key press listener
     useEffect(() => {
         if (gameState === "game") {
-            window.addEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+            window.addEventListener("keydown", handleKeyPress);
             return () => {
-                window.removeEventListener("keydown", (event) => handleKeyPress(event, setMoveDirection));
+                window.removeEventListener("keydown", handleKeyPress);
             };
         }
-    }, [gameState, handleKeyPress]);
+    }, [gameState, changeMoveDirection]);
 
-    // Pieces movement and rendering
+    // Pieces saving and movement
     useEffect(() => {
         if (gameState === "game" && moveDirection !== "") {
-            pieces.forEach((i) => console.log(i));
-            movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore);
+            movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore, setPrevPieces);
+            setPrevPieces(deepCopy(pieces));
         }
     }, [moveDirection, movePiece, pieces]);
 
-    // Pieces movement and rendering
+    // Pieces rendering
     useEffect(() => {
-        if (gameState === "game") {
-            formView(fieldSize, setField, pieces);
-            checkFieldFullness(pieces, fieldSize, setGameState);
-        }
+        formView(fieldSize, setField, pieces);
+        checkFieldFullness(pieces, fieldSize, setGameState);
     }, [pieces, formView, checkFieldFullness]);
 
     // Save best score to local storage
@@ -76,16 +87,14 @@ export const GameProvider = (props) => {
         }
     }, [setBestScoresData]);
 
-    const resetGame = () => {
-        setPieces(initialPieces);
-        setField(initialField);
-        setScore(initialScore);
-    };
-
     return (
         <GameContext.Provider
             value={{
                 field: field,
+                pieces: pieces,
+                setPieces: setPieces,
+                prevPieces: prevPieces,
+                setPrevPieces: setPrevPieces,
                 setField: setField,
                 fieldSize: fieldSize,
                 setFieldSize: setFieldSize,

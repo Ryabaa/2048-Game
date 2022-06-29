@@ -1,15 +1,35 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GameContext } from "../game/GameContext.jsx";
+
+import createPiece from "../game/createPiece";
 
 import { IconContext } from "react-icons/lib";
 import { RiArrowGoBackLine } from "react-icons/ri";
 import { CgMenu } from "react-icons/cg";
 import { VscDebugRestart } from "react-icons/vsc";
 
-function Nav() {
-    const { setGameState, resetGame } = useContext(GameContext);
+const initialMoveBackActive = false;
 
-    const handleMoveBack = () => {};
+function Nav() {
+    const { setGameState, resetGame, setPieces, prevPieces, setPrevPieces, pieces, fieldSize } = useContext(GameContext);
+
+    const [moveBackActive, setMoveBackActive] = useState(initialMoveBackActive);
+
+    useEffect(() => {
+        if (prevPieces.length !== 0) {
+            setMoveBackActive(true);
+        } else {
+            setMoveBackActive(false);
+        }
+    }, [prevPieces, setMoveBackActive]);
+
+    const handleMoveBack = () => {
+        if (moveBackActive) {
+            setGameState("game");
+            setPieces(prevPieces);
+            setPrevPieces([]);
+        }
+    };
 
     const handleOpenMenu = () => {
         setGameState("start");
@@ -18,11 +38,12 @@ function Nav() {
 
     const handleRestartGame = () => {
         resetGame();
+        setGameState("game");
     };
 
     return (
         <div className="nav-container">
-            <button onClick={handleMoveBack} className="nav__button">
+            <button onClick={handleMoveBack} className={moveBackActive ? "nav__button nav__button--active" : "nav__button"}>
                 <IconContext.Provider value={{ className: "nav__button-icon" }}>
                     <RiArrowGoBackLine />
                 </IconContext.Provider>

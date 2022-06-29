@@ -81,7 +81,7 @@ body {
 }
 
 .start {
-  background-color: #1f282e7e;
+  background-color: #1f282e60;
   min-width: 300px;
   border-radius: 20px;
   padding: 40px 80px;
@@ -103,9 +103,9 @@ body {
 
 .start__play {
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 15px 15px 0 0;
   border-bottom: #535c7565 7px solid;
-  padding: 20px 60px;
+  padding: 20px 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -119,12 +119,13 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  row-gap: 20px;
+  row-gap: 5px;
 }
 
 .start__play-text {
   color: #fff;
-  font-size: 70px;
+  font-size: 60px;
+  font-family: Josefin Sans;
 }
 
 .start__play:hover {
@@ -138,8 +139,8 @@ body {
 }
 
 .start__icon {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   color: #fff;
   border-radius: 50%;
   -webkit-transition: all 0.4s ease;
@@ -159,7 +160,7 @@ body {
 
 .start__fieldsize-text {
   color: #fff;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .start__buttons-container {
@@ -204,6 +205,7 @@ body {
 
 .start__button-score {
   color: #e6e6e6;
+  font-family: Josefin Sans;
   font-size: 15px;
 }
 
@@ -384,7 +386,7 @@ body {
 }
 
 .nav__button:hover {
-  color: #ffffff;
+  color: #fff;
 }
 
 .nav__button-text {
@@ -395,6 +397,20 @@ body {
 .nav__button-icon {
   width: 30px;
   height: 30px;
+}
+
+.nav__button:first-child {
+  color: #9fa9bb;
+  cursor: unset;
+}
+
+.nav__button--active:first-child {
+  color: #a7c1f3;
+  cursor: pointer;
+}
+
+.nav__button--active:first-child:hover {
+  color: #fff;
 }
 
 .field {
@@ -413,8 +429,8 @@ body {
 }
 
 .field__piece {
-  background-color: #1f282e1e;
-  border-radius: 10px;
+  background-color: #1f282e0e;
+  border-radius: 15px;
   width: 70px;
   height: 70px;
   display: -webkit-box;

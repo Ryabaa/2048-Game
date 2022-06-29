@@ -1,19 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-import pieceColors from "../../utils/colors";
+import pieceColors from "../game/pieceColors";
 
-function Piece({ number }) {
-    const [colorState, setColorState] = useState("");
+const initialPieceColor = "";
+const initialPieceValue = "";
+
+function Piece({ pieceNumber, field }) {
+    const [pieceColor, setPieceColor] = useState(initialPieceColor);
+    const [pieceValue, setPieceValue] = useState(initialPieceValue);
 
     useEffect(() => {
-        pieceColors.forEach((i) => {
-            if (number === i.number) setColorState(i.color);
+        pieceColors.forEach((color) => {
+            if (pieceNumber === color.number) {
+                setPieceColor(color.value);
+            }
         });
-    });
+    }, [field]);
+
+    useEffect(() => {
+        if (pieceNumber !== 0) {
+            setPieceValue(pieceNumber);
+        } else {
+            setPieceValue(initialPieceValue);
+        }
+    }, [field]);
 
     return (
-        <div className="field__piece" style={number === 0 ? {} : { background: colorState, boxShadow: `0px 1px 50px ${colorState + 50}` }}>
-            {number === 0 ? "" : number}
+        <div className="field__piece" style={{ background: pieceColor }}>
+            {pieceValue}
         </div>
     );
 }

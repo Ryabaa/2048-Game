@@ -1,4 +1,8 @@
-function FieldSizeButton({ button, buttonIndex, editButton, setFieldSize, bestScoresData }) {
+import { useContext } from "react";
+import { GameContext } from "../game/GameContext.jsx";
+
+function FieldSizeButton({ button, buttonIndex, editButton }) {
+    const { setFieldSize, bestScoresData } = useContext(GameContext);
     let { name, value, active } = button;
 
     const handleChangeFieldSize = () => {

@@ -1,4 +1,4 @@
-function handleKeyPress(event, setMoveDirection) {
+function changeMoveDirection(event, setMoveDirection) {
     setMoveDirection("");
     switch (event.keyCode) {
         case 87:
@@ -16,6 +16,7 @@ function handleKeyPress(event, setMoveDirection) {
         default:
             break;
     }
+    return;
 }
 
-export default handleKeyPress;
+export default changeMoveDirection;

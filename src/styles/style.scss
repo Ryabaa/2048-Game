@@ -67,7 +67,7 @@ body {
 }
 
 .start {
-    background-color: #1f282e7e;
+    background-color: #1f282e60;
     min-width: 300px;
     border-radius: 20px;
     padding: 40px 80px;
@@ -78,17 +78,18 @@ body {
     row-gap: 50px;
     &__play {
         cursor: pointer;
-        border-radius: 30px;
+        border-radius: 15px 15px 0 0;
         border-bottom: #535c7565 7px solid;
-        padding: 20px 60px;
+        padding: 20px 40px;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        row-gap: 20px;
+        row-gap: 5px;
         &-text {
             color: #fff;
-            font-size: 70px;
+            font-size: 60px;
+            font-family: Josefin Sans;
         }
         &:hover {
             background-color: #535c7565;
@@ -99,8 +100,8 @@ body {
         }
     }
     &__icon {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         color: #fff;
         border-radius: 50%;
         @include slowTrans();
@@ -111,7 +112,7 @@ body {
         row-gap: 20px;
         &-text {
             color: #fff;
-            font-size: 30px;
+            font-size: 25px;
         }
     }
     &__buttons-container {
@@ -137,6 +138,7 @@ body {
         }
         &-score {
             color: #e6e6e6;
+            font-family: Josefin Sans;
             font-size: 15px;
         }
         &:hover,
@@ -256,7 +258,7 @@ body {
         width: 50px;
         @include slowTrans();
         &:hover {
-            color: #ffffff;
+            color: #fff;
         }
         &-text {
             font-size: 13px;
@@ -265,6 +267,19 @@ body {
         &-icon {
             width: 30px;
             height: 30px;
+        }
+        &:first-child {
+            color: #9fa9bb;
+            cursor: unset;
+        }
+        &--active {
+            &:first-child {
+                color: #a7c1f3;
+                cursor: pointer;
+                &:hover {
+                    color: #fff;
+                }
+            }
         }
     }
 }
@@ -279,8 +294,8 @@ body {
     column-gap: 8px;
     padding: 20px;
     &__piece {
-        background-color: #1f282e1e;
-        border-radius: 10px;
+        background-color: #1f282e0e;
+        border-radius: 15px;
         width: 70px;
         height: 70px;
         display: flex;

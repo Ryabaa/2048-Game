@@ -17,7 +17,7 @@ function Game() {
                 <Score />
             </div>
             <div style={{ "--field-size": fieldSize }} className="field">
-                {field.map((row, y) => row.map((number, x) => <Piece key={`${y}-${x}`} number={number} />))}
+                {field.map((row, y) => row.map((pieceNumber, x) => <Piece key={`${y}-${x}`} pieceNumber={pieceNumber} field={field} />))}
             </div>
             <Nav />
         </section>
