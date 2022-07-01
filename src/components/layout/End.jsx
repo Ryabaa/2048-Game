@@ -9,7 +9,9 @@ function End() {
     const [endActive, setEndActive] = useState(initialEndActive);
 
     useEffect(() => {
-        setEndActive(true);
+        setTimeout(() => {
+            setEndActive(true);
+        }, 1000);
     }, []);
 
     return (

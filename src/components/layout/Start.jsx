@@ -29,15 +29,14 @@ function Start() {
 
     return (
         <section className="start">
-            <div className="start__play" onClick={handleStartGame}>
-                <p className="start__play-text">Play</p>
+            <h1 className="title">2048</h1>
+            <button onClick={handleStartGame}>
                 <IconContext.Provider value={{ className: "start__icon" }}>
                     <BsPlayCircle />
                 </IconContext.Provider>
-            </div>
+            </button>
 
             <div className="start__fieldsize">
-                <p className="start__fieldsize-text">Field Size</p>
                 <div className="start__buttons-container">
                     {fieldSizeButtons.map((button, buttonIndex) => (
                         <FieldSizeButton className="start__button" key={buttonIndex} button={button} />
