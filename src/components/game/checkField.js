@@ -1,4 +1,4 @@
-function checkFieldFullness(pieces, fieldSize, setGameState) {
+function checkField(pieces, fieldSize, setGameState) {
     if (pieces.length === fieldSize * fieldSize) {
         let isFieldFull = true;
 
@@ -35,4 +35,4 @@ function checkFieldFullness(pieces, fieldSize, setGameState) {
     }
 }
 
-export default checkFieldFullness;
+export default checkField;

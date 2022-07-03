@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GameContext } from "../game/GameContext.jsx";
 import { IconContext } from "react-icons";
 import { BsPlayCircle } from "react-icons/bs";

@@ -65,7 +65,7 @@ function movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize
         createPiece(fieldSize, newPieces, setPieces);
     }
 
-    setMoveDirection("");
+    setMoveDirection(null);
 
     return;
 }

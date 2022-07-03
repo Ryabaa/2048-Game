@@ -414,6 +414,7 @@ body {
   -webkit-column-gap: 8px;
           column-gap: 8px;
   padding: 20px;
+  cursor: pointer;
 }
 
 .field__piece {
