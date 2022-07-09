@@ -2,26 +2,27 @@ import { useState, createContext, useEffect } from "react";
 
 import createField from "./createField";
 import createPiece from "./createPiece";
-import movePiece from "./movePiece";
+import movePieces from "./movePieces";
 import keyPressFunction from "./keyPressFunction";
 import touchFunction from "./touchFunction";
 import touchAction from "./touchAction";
 import formView from "./formView";
 import checkField from "./checkField";
 
-import deepCopy from "../../utils/deepCopy";
 import getLocalStorage from "../../utils/getLocalStorage";
 import setLocalStorage from "../../utils/setLocalStorage";
+import deepCopy from "../../utils/deepCopy";
 
 export const GameContext = createContext();
 
-const initialGameState = "start";
+const initialGameState = "game";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
 const initialPrevPieces = [];
-const initialMoveDirection = null;
 const initialScore = 0;
+const initialPrevScore = 0;
+const initialMoveDirection = null;
 const initialBestScoresData = { 3: 0, 4: 0, 5: 0 };
 const initialTouchPosition = { x: null, y: null };
 const initialTouchEnd = false;
@@ -32,8 +33,9 @@ export const GameProvider = (props) => {
     const [field, setField] = useState(initialField);
     const [pieces, setPieces] = useState(initialPieces);
     const [prevPieces, setPrevPieces] = useState(initialPrevPieces);
-    const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
     const [score, setScore] = useState(initialScore);
+    const [prevScore, setPrevScore] = useState(initialPrevScore);
+    const [moveDirection, setMoveDirection] = useState(initialMoveDirection);
     const [bestScoresData, setBestScoresData] = useState(initialBestScoresData);
     const [touchStart, setTouchStart] = useState(initialTouchPosition);
     const [touchCurrent, setTouchCurrent] = useState(initialTouchPosition);
@@ -55,6 +57,7 @@ export const GameProvider = (props) => {
 
     const resetGame = () => {
         setPieces(initialPieces);
+        setPrevScore(initialPrevScore);
         setPrevPieces(initialPrevPieces);
         setScore(initialScore);
     };
@@ -100,11 +103,12 @@ export const GameProvider = (props) => {
     // Pieces saving and movement
     useEffect(() => {
         if (gameState === "game" && moveDirection) {
-            console.log(moveDirection);
-            movePiece(moveDirection, setMoveDirection, pieces, setPieces, fieldSize, score, setScore, setPrevPieces);
+            setPrevScore(score);
             setPrevPieces(deepCopy(pieces));
+            movePieces(pieces, setPieces, moveDirection, fieldSize, score, setScore);
+            setMoveDirection(initialMoveDirection);
         }
-    }, [moveDirection, movePiece, pieces, setPrevPieces, deepCopy]);
+    }, [moveDirection, setMoveDirection, movePieces, pieces, setPrevPieces, setPrevScore, deepCopy]);
 
     // Pieces rendering
     useEffect(() => {
@@ -138,12 +142,15 @@ export const GameProvider = (props) => {
                 setPieces: setPieces,
                 prevPieces: prevPieces,
                 setPrevPieces: setPrevPieces,
+                initialPrevPieces: initialPrevPieces,
                 setField: setField,
                 fieldSize: fieldSize,
                 setFieldSize: setFieldSize,
                 gameState: gameState,
                 setGameState: setGameState,
                 score: score,
+                setScore: setScore,
+                prevScore: prevScore,
                 bestScore: bestScoresData[fieldSize],
                 bestScoresData: bestScoresData,
                 resetGame: resetGame,

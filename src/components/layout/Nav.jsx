@@ -11,7 +11,8 @@ import { VscDebugRestart } from "react-icons/vsc";
 const initialMoveBackActive = false;
 
 function Nav() {
-    const { setGameState, resetGame, setPieces, prevPieces, setPrevPieces } = useContext(GameContext);
+    const { setGameState, resetGame, setPieces, prevPieces, setPrevPieces, initialPrevPieces, setScore, prevScore } =
+        useContext(GameContext);
 
     const [moveBackActive, setMoveBackActive] = useState(initialMoveBackActive);
 
@@ -27,7 +28,8 @@ function Nav() {
         if (moveBackActive) {
             setGameState("game");
             setPieces(prevPieces);
-            setPrevPieces([]);
+            setScore(prevScore);
+            setPrevPieces(initialPrevPieces);
         }
     };
 
