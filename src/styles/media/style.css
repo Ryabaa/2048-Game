@@ -1,0 +1,52 @@
+@media (max-width: 500px) {
+  .info {
+    -webkit-column-gap: 0;
+            column-gap: 0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .field__piece {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+  .score {
+    min-width: 180px;
+  }
+  .score__text {
+    font-size: 15px;
+  }
+  .score__number {
+    font-size: 19px;
+  }
+  .game {
+    padding: 0 0 20px;
+    width: 100vw;
+  }
+  .game .title {
+    font-size: 60px;
+  }
+  .nav__button-icon {
+    width: 23px;
+    height: 23px;
+  }
+  .start {
+    padding: 50px 70px 40px;
+  }
+}
+
+@media (max-width: 350px) {
+  .game .title {
+    font-size: 55px;
+  }
+  .field__piece {
+    width: 55px;
+    height: 55px;
+    font-size: 20px;
+  }
+  .start {
+    width: 100vw;
+  }
+}
+/*# sourceMappingURL=style.css.map */

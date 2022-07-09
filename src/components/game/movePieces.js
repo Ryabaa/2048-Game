@@ -4,6 +4,7 @@ function sortPieces(pieces, setPieces, moveDirection, fieldSize, score, setScore
     let linesAxis = "x";
     let piecesAxis = "y";
     let piecesOrder = "decrease";
+    let piecesMoved = false;
     switch (moveDirection) {
         case "left":
         case "right":
@@ -35,7 +36,6 @@ function sortPieces(pieces, setPieces, moveDirection, fieldSize, score, setScore
             .sort((a, b) => (piecesOrder === "increase" ? b[piecesAxis] - a[piecesAxis] : a[piecesAxis] - b[piecesAxis]))
             .forEach((piece, pieceIndex, arr) => {
                 const samePieceIndex = arr.findIndex((findPiece) => findPiece.number === piece.number);
-                console.log(arr, samePieceIndex, pieceIndex);
                 if (samePieceIndex !== -1 && samePieceIndex !== pieceIndex) {
                     let pathEmpty = true;
                     for (let i = samePieceIndex + 1; i < pieceIndex; i++) {
@@ -45,6 +45,7 @@ function sortPieces(pieces, setPieces, moveDirection, fieldSize, score, setScore
                         arr.splice(pieceIndex, 1);
                         arr.splice(samePieceIndex, 1, { ...piece, number: piece.number * 2 });
                         setScore(score + piece.number * 2);
+                        piecesMoved = true;
                     }
                 }
             });
@@ -56,12 +57,14 @@ function sortPieces(pieces, setPieces, moveDirection, fieldSize, score, setScore
                         const nextPiece = arr.find((findPiece) => findPiece[piecesAxis] === i + 1);
                         if (nextPiece) break;
                         piece[piecesAxis] += 1;
+                        piecesMoved = true;
                     }
                 } else {
                     for (let i = piece[piecesAxis]; i > 0; i--) {
                         const nextPiece = arr.find((findPiece) => findPiece[piecesAxis] === i - 1);
                         if (nextPiece) break;
                         piece[piecesAxis] -= 1;
+                        piecesMoved = true;
                     }
                 }
                 return piece;
@@ -75,8 +78,11 @@ function sortPieces(pieces, setPieces, moveDirection, fieldSize, score, setScore
             newPieces.push({ ...piece });
         });
     });
-    setPieces(newPieces);
-    createPiece(fieldSize, newPieces, setPieces);
+
+    if (piecesMoved) {
+        setPieces(newPieces);
+        createPiece(fieldSize, newPieces, setPieces);
+    }
 }
 
 export default sortPieces;

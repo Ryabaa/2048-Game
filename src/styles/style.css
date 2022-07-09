@@ -84,7 +84,7 @@ body {
 .start {
   background-color: #1f282e60;
   min-width: 300px;
-  padding: 40px 80px;
+  padding: 50px 80px 40px;
   border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;

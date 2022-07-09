@@ -15,7 +15,7 @@ import deepCopy from "../../utils/deepCopy";
 
 export const GameContext = createContext();
 
-const initialGameState = "game";
+const initialGameState = "start";
 const initialFieldSize = 4;
 const initialField = [];
 const initialPieces = [];
