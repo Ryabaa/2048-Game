@@ -100,7 +100,7 @@ export const GameProvider = (props) => {
         }
     }, [gameState]);
 
-    // Pieces saving and movement
+    // Pieces  movement
     useEffect(() => {
         if (gameState === "game" && moveDirection) {
             setPrevScore(score);
